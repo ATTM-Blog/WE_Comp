@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+bat() {
+  for d in /sys/class/power_supply/*; do
+    [ -f "$d/capacity" ] && echo "BAT $(cat $d/capacity)%"
+  done
+}
+
+cpu() {
+  awk '{u=$2+$4; t=$2+$4+$5; printf "CPU %d%%", 100*u/t}' /proc/stat
+}
+
+mem() {
+  free -m | awk '/Mem/ {printf "RAM %d/%dMB", $3,$2}'
+}
+
+date "+$(bat) | $(cpu) | $(mem) | %H:%M %d-%b"
