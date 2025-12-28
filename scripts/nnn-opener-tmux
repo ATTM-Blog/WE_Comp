@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+pane=$(tmux list-panes -F '#{pane_id} #{pane_top}' | sort -k2n | head -1 | cut -d' ' -f1)
+tmux send-keys -t "$pane" "vim \"$1\"" C-m
