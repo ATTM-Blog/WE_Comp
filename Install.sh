@@ -17,12 +17,16 @@ sudo apt update
 
 echo "[WE-Comp] Installing base packages..."
 sudo apt install -y \
-  tmux nnn vim less git gitui btop htop \
+  tmux nnn vim less git btop htop \
   iw wireless-tools libraspberrypi-bin \
   unzip zip tree ripgrep \
   build-essential gdb \
   python3 python3-venv python3-pip \
   python3-numpy python3-scipy python3-matplotlib
+
+# GitUI (apt on some distros, GitHub binary on Bookworm)
+chmod +x scripts/install_gitui.sh
+bash ./scripts/install_gitui.sh || echo "[WE-Comp] gitui install skipped (non-fatal)"
 
 echo "[WE-Comp] Installing minimal X11 + KiCad + NetSurf..."
 sudo apt install -y \
